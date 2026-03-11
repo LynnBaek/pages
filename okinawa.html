@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title data-id="th-modified">🌺 오키나와 여행 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&family=Playfair+Display:ital,wght@0,700;1,500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ocean: #0077b6;
+    --sky: #48cae4;
+    --sand: #f8f3e8;
+    --coral: #e07a5f;
+    --leaf: #2d6a4f;
+    --dark: #1a1a2e;
+    --light-ocean: #ade8f4;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Noto Sans KR', sans-serif; background: var(--sand); color: var(--dark); overflow-x: hidden; }
+
+  .hero {
+    background: linear-gradient(160deg, #023e8a 0%, #0077b6 40%, #48cae4 75%, #ade8f4 100%);
+    min-height: 90vh;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    position: relative; overflow: hidden; padding: 60px 20px;
+  }
+  .hero::before {
+    content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 120px;
+    background: var(--sand); clip-path: ellipse(55% 100% at 50% 100%);
+  }
+  .waves { position: absolute; bottom: 80px; left: 0; right: 0; height: 60px; opacity: 0.3; }
+  .waves::before, .waves::after {
+    content: ''; position: absolute; width: 200%; height: 60px;
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 60'%3E%3Cpath fill='white' d='M0,30 C240,60 480,0 720,30 C960,60 1200,0 1440,30 L1440,60 L0,60 Z'/%3E%3C/svg%3E") repeat-x;
+    background-size: 720px 60px; animation: wave 8s linear infinite;
+  }
+  .waves::after { animation-duration: 12s; animation-direction: reverse; opacity: 0.5; top: 10px; }
+  @keyframes wave { from { transform: translateX(0); } to { transform: translateX(-720px); } }
+
+  .hero-badge {
+    background: rgba(255,255,255,0.2); backdrop-filter: blur(10px);
+    border: 1px solid rgba(255,255,255,0.4); border-radius: 30px;
+    padding: 6px 20px; color: white; font-size: 13px; font-weight: 500;
+    letter-spacing: 2px; text-transform: uppercase; margin-bottom: 24px;
+    animation: fadeUp 0.8s ease both;
+  }
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(48px, 10vw, 90px); color: white; text-align: center; line-height: 1;
+    animation: fadeUp 0.8s 0.1s ease both; text-shadow: 0 4px 30px rgba(0,0,50,0.2);
+  }
+  .hero h1 .sub { display: block; font-style: italic; font-size: 0.5em; font-weight: 400; opacity: 0.85; }
+  .hero-meta {
+    display: flex; gap: 16px; margin-top: 32px; flex-wrap: wrap; justify-content: center;
+    animation: fadeUp 0.8s 0.2s ease both;
+  }
+  .hero-chip {
+    background: rgba(255,255,255,0.18); backdrop-filter: blur(8px);
+    border: 1px solid rgba(255,255,255,0.35); border-radius: 50px;
+    padding: 10px 22px; color: white; font-size: 14px; font-weight: 500;
+  }
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
+
+  .section-header { text-align: center; padding: 60px 20px 32px; }
+  .section-header .label { font-size: 11px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; color: var(--ocean); margin-bottom: 8px; }
+  .section-header h2 { font-family: 'Playfair Display', serif; font-size: clamp(26px, 5vw, 38px); color: var(--dark); }
+
+  .info-section { padding: 60px 20px 20px; }
+  .info-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 16px; max-width: 900px; margin: 0 auto; }
+  .info-card {
+    background: white; border-radius: 20px; padding: 22px;
+    box-shadow: 0 4px 24px rgba(0,100,180,0.08); border: 1px solid rgba(0,119,182,0.1);
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .info-card:hover { transform: translateY(-3px); box-shadow: 0 8px 32px rgba(0,100,180,0.15); }
+  .info-card .icon { font-size: 26px; margin-bottom: 10px; }
+  .info-card .label { font-size: 11px; font-weight: 700; color: var(--ocean); letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 4px; }
+  .info-card .value { font-size: 13px; font-weight: 500; color: var(--dark); line-height: 1.5; }
+  .alert-card {
+    background: linear-gradient(135deg, #fff3e0, #ffe0b2); border: 1.5px solid #ffb74d;
+    border-radius: 20px; padding: 18px 24px; max-width: 900px; margin: 20px auto 0;
+    font-size: 14px; color: #7c4a00; line-height: 1.7;
+  }
+  .alert-card strong { color: #e65100; }
+
+  .days { padding: 0 20px 20px; }
+  .day-block { max-width: 900px; margin: 0 auto 40px; border-radius: 24px; overflow: hidden; box-shadow: 0 8px 40px rgba(0,50,100,0.1); }
+  .day-header { padding: 26px 30px; display: flex; align-items: center; gap: 20px; }
+  .day-1 .day-header { background: linear-gradient(135deg, #0077b6, #00b4d8); }
+  .day-2 .day-header { background: linear-gradient(135deg, #2d6a4f, #52b788); }
+  .day-3 .day-header { background: linear-gradient(135deg, #7b2d8b, #c77dff); }
+  .day-4 .day-header { background: linear-gradient(135deg, #e07a5f, #f4a261); }
+  .day-num { background: rgba(255,255,255,0.25); border-radius: 14px; padding: 8px 16px; color: white; font-weight: 900; font-size: 20px; flex-shrink: 0; }
+  .day-header .info { color: white; }
+  .day-header .info .date { font-size: 19px; font-weight: 700; }
+  .day-header .info .theme { font-size: 13px; opacity: 0.85; margin-top: 2px; }
+  .day-body { background: white; }
+  .schedule-item { display: grid; grid-template-columns: 68px 1fr; border-bottom: 1px solid #f0f4f8; transition: background 0.15s; }
+  .schedule-item:last-child { border-bottom: none; }
+  .schedule-item:hover { background: #f8fbff; }
+  .schedule-time { padding: 15px 10px; font-size: 11px; font-weight: 700; color: #90a4b8; text-align: right; border-right: 2px solid #e8f0f7; line-height: 1.3; }
+  .schedule-content { padding: 15px 20px; }
+  .schedule-title { font-size: 14px; font-weight: 600; color: var(--dark); margin-bottom: 2px; }
+  .schedule-memo { font-size: 12px; color: #7a8fa8; line-height: 1.5; }
+  .tag { display: inline-block; border-radius: 5px; padding: 2px 7px; font-size: 10px; font-weight: 700; margin-left: 6px; vertical-align: middle; }
+  .tag-meal { background: #fff3e0; color: #e65100; }
+  .tag-spot { background: #e8f5e9; color: #2e7d32; }
+  .tag-travel { background: #e3f2fd; color: #1565c0; }
+  .tag-alert { background: #fce4ec; color: #c62828; }
+
+  .meals-section { padding: 0 20px 40px; }
+  .meals-grid { max-width: 900px; margin: 0 auto; display: grid; grid-template-columns: repeat(4, 1fr); border-radius: 20px; overflow: hidden; box-shadow: 0 4px 24px rgba(0,100,180,0.1); border: 1px solid #dde8f5; }
+  .meal-header { background: linear-gradient(135deg, var(--ocean), var(--sky)); color: white; padding: 14px 10px; text-align: center; font-size: 12px; font-weight: 700; letter-spacing: 0.5px; }
+  .meal-cell { background: white; padding: 15px 10px; text-align: center; border-top: 1px solid #e8f0f8; border-right: 1px solid #e8f0f8; font-size: 13px; line-height: 1.5; color: #333; }
+  .meal-cell:nth-child(4n) { border-right: none; }
+  .meal-cell.day-label { background: #f0f6ff; font-weight: 700; color: var(--ocean); font-size: 14px; }
+
+  .tips-section { padding: 0 20px 60px; }
+  .tips-grid { max-width: 900px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; }
+  .tip-card { background: white; border-radius: 18px; padding: 22px; box-shadow: 0 4px 20px rgba(0,80,160,0.07); border-left: 4px solid var(--ocean); }
+  .tip-card h4 { font-size: 14px; font-weight: 700; color: var(--ocean); margin-bottom: 12px; }
+  .tip-card ul { list-style: none; }
+  .tip-card ul li { font-size: 13px; color: #445; padding: 5px 0 5px 16px; border-bottom: 1px solid #f0f4f8; position: relative; line-height: 1.5; }
+  .tip-card ul li:last-child { border-bottom: none; }
+  .tip-card ul li::before { content: '→'; position: absolute; left: 0; color: var(--sky); font-size: 11px; top: 7px; }
+
+  footer { background: var(--dark); color: rgba(255,255,255,0.5); text-align: center; padding: 32px 20px; font-size: 13px; }
+  footer strong { color: rgba(255,255,255,0.85); }
+
+  @media (max-width: 600px) {
+    .meals-grid { grid-template-columns: repeat(2, 1fr); }
+    .day-header { flex-direction: column; align-items: flex-start; gap: 10px; }
+  }
+</style>
+<meta property="og:title" content="🌺 오키나와 여행 2026" data-id="th-modified" ><meta name="description" content="index" data-id="th-modified" ><meta property="og:description" content="index" data-id="th-modified" ><meta property="og:image" content="https://tiiny.host/assets/logo-purple-bg.png" data-id="th-modified" ><meta property="og:url" content="https://apricot-inger-6.tiiny.site/" data-id="th-modified" ><meta property="og:type" content="website" data-id="th-modified" ><script defer data-domain="apricot-inger-6.tiiny.site" src="https://analytics.tiiny.site/js/plausible.js"></script><script type="text/javascript" src="https://tiiny.host/ad-script.js"></script></head>
+<body>
+
+<section class="hero">
+  <div class="waves"></div>
+  <div class="hero-badge">✈️ 3박 4일 일본 여행</div>
+  <h1>오키나와<span class="sub">Okinawa, Japan</span></h1>
+  <div class="hero-meta">
+    <div class="hero-chip">📅 2026.03.28 — 03.31</div>
+    <div class="hero-chip">👨‍👩‍👦 유영준, 백서린, 유승재, 탁명성, 김성준</div>
+    <div class="hero-chip">🚗 렌트카 여행</div>
+  </div>
+</section>
+
+<section class="info-section">
+  <div class="info-grid">
+    <div class="info-card"><div class="icon">🏨</div><div class="label">숙소</div><div class="value">더 호텔 차탄<br>바이 선레스트 리조트</div></div>
+    <div class="info-card"><div class="icon">🚗</div><div class="label">렌트카</div><div class="value">Oasis Rent a Car<br>픽업 3/28 15:00</div></div>
+    <div class="info-card"><div class="icon">✈️</div><div class="label">항공</div><div class="value">인천 11:25 → 나하 14:00<br>나하 15:00 → 인천 17:35</div></div>
+    <div class="info-card"><div class="icon">🚅</div><div class="label">KTX</div><div class="value">익산 06:14 → 광명<br>광명 21:35 → 익산</div></div>
+  </div>
+  <div class="alert-card">⚠️ <strong>사전 예약 필수!</strong> &nbsp;백년고가 우후야 — <strong>ufuya.com</strong>에서 디너 예약 / 추라우미 수족관 — 클룩(Klook) 온라인 선구매 강추</div>
+</section>
+
+<div class="section-header"><div class="label">Day by Day</div><h2>여행 일정</h2></div>
+
+<div class="days">
+  <div class="day-block day-1">
+    <div class="day-header"><div class="day-num">DAY 1</div><div class="info"><div class="date">3월 28일 (토)</div><div class="theme">도착 & 차탄 첫날 🌅</div></div></div>
+    <div class="day-body">
+      <div class="schedule-item"><div class="schedule-time">06:14</div><div class="schedule-content"><div class="schedule-title">🚅 익산 KTX 출발</div><div class="schedule-memo">익산 → 광명역 07:24 도착</div></div></div>
+      <div class="schedule-item"><div class="schedule-time">07:30</div><div class="schedule-content"><div class="schedule-title">🏢 광명 도심공항 체크인</div><div class="schedule-memo">수하물 위탁 후 리무진 → 인천공항</div></div></div>
+      <div class="schedule-item"><div class="schedule-time">11:25</div><div class="schedule-content"><div class="schedule-title">✈️ 인천공항 출발 <span class="tag tag-travel">항공</span></div><div class="schedule-memo">나하 도착 14:00</div></div></div>
+      <div class="schedule-item"><div class="schedule-time">15:00</div><div class="schedule-content"><div class="schedule-title">🚗 Oasis 렌트카 픽업 <span class="tag tag-travel">교통</span></div><div class="schedule-memo">나하공항 / 차탄까지 약 40분</div></div></div>
+      <div class="schedule-item"><div class="schedule-time">16:00</div><div class="schedule-content"><div class="schedule-title">🏨 더 호텔 차탄 체크인 & 휴식</div><div class="schedule-memo"></div></div></div>
+      <div class="schedule-item"><div class="schedule-time">17:00</div><div class="schedule-content"><div class="schedule-title">☕ Zhyvago Coffee Works <span class="tag tag-meal">카페</span></div><div class="schedule-memo">아메리칸 빌리지 오션뷰 카페 / 8AM~8PM</div></div></div>
+      <div class="schedule-item"><div class="schedule-time">17:30</div><div class="schedule-content"><div class="schedule-title">🌅 아메리칸 빌리지 산책 <span class="tag tag-spot">관광</span></div><div class="schedule-memo">석양 & 야경 명소</div></div></div>
+      <div class="schedule-item"><div class="schedule-time">19:30</div><div class="schedule-content"><div class="schedule-title">🥩 얏빠리스테이크 차탄점 <span class="tag tag-meal">저녁</span></div><div class="schedule-memo">무한 라이스·수프 / 오리온 맥주 🍺 / 11AM~9:30PM</div></div></div>
+    </div>
+  </div>
+
+  <div class="day-block day-2">
+    <div class="day-header"><div class="day-num">DAY 2</div><div class="info"><div class="date">3월 29일 (일)</div><div class="theme">북부 드라이브 + 우후야 🐳</div></div></div>
+    <div class="day-body">
+      <div class="schedule-item"><div class="schedule-time">08:00</div><div class="schedule-content"><div class="schedule-title">🏪 편의점 아침</div><div class="schedule-memo"></div></div></div>
+      <div class="schedule-item"><div class="schedule-time">08:30</div><div class="schedule-content"><div class="schedule-title">🚗 북부 드라이브 출발 <span class="tag tag-travel">교통</span></div><div class="schedule-memo">차탄 → 만좌모 약 1시간</div></div></div>
+      <div class="schedule-item"><div class="schedule-time">10:00</div><div class="schedule-content"><div class="schedule-title">🌊 만좌모 (Cape Manzamo) <span class="tag tag-spot">관광</span></div><div class="schedule-memo">입장 100엔 / 코끼리 바위 절경 / 30~40분</div></div></div>
+      <div class="schedule-item"><div class="schedule-time">11:00</div><div class="schedule-content"><div class="schedule-title">🌮 Captain Kangaroo 타코라이스 <span class="tag tag-meal">점심</span></div><div class="schedule-memo">오션뷰 맛집 / 일요일 영업 ✅ / 11AM~4PM (화·수 휴무)</div></div></div>
+      <div class="schedule-item"><div class="schedule-time">13:00</div><div class="schedule-content"><div class="schedule-title">🐳 추라우미 수족관 <span class="tag tag-spot">관광</span></div><div class="schedule-memo">고래상어·만타레이! 2~3시간 / 클룩 선구매 강추</div></div></div>
+      <div class="schedule-item"><div class="schedule-time">15:30</div><div class="schedule-content"><div class="schedule-title">🐬 야외 돌고래 쇼</div><div class="schedule-memo">무료 / 현장 시간표 확인</div></div></div>
+      <div class="schedule-item"><div class="schedule-time">16:00</div><div class="schedule-content"><div class="schedule-title">🍦 블루실 아이스크림 <span class="tag tag-meal">간식</span></div><div class="schedule-memo">수족관 내 / 베니모(자색고구마) 맛 강추</div></div></div>
+      <div class="schedule-item"><div class="schedule-time">17:30</div><div class="schedule-content"><div class="schedule-title">🏡 백년고가 우후야 <span class="tag tag-meal">저녁</span> <span class="tag tag-alert">예약필수</span></div><div class="schedule-memo">아구 샤브샤브·오키나와 소바 / ufuya.com / 17:30 오픈런! / 라스트오더 20:15</div></div></div>
+      <div class="schedule-item"><div class="schedule-time">19:30</div><div class="schedule-content"><div class="schedule-title">🚗 차탄 복귀</div><div class="schedule-memo">약 1시간 20분</div></div></div>
+    </div>
+  </div>
+
+  <div class="day-block day-3">
+    <div class="day-header"><div class="day-num">DAY 3</div><div class="info"><div class="date">3월 30일 (월)</div><div class="theme">나하 관광 + 포켓몬센터 🎮</div></div></div>
+    <div class="day-body">
+      <div class="schedule-item"><div class="schedule-time">08:00</div><div class="schedule-content"><div class="schedule-title">🏪 편의점 아침</div><div class="schedule-memo"></div></div></div>
+      <div class="schedule-item"><div class="schedule-time">09:00</div><div class="schedule-content"><div class="schedule-title">🚗 나하 출발 <span class="tag tag-travel">교통</span></div><div class="schedule-memo">차탄 → 나하 약 40분</div></div></div>
+      <div class="schedule-item"><div class="schedule-time">10:00</div><div class="schedule-content"><div class="schedule-title">🏯 슈리성 <span class="tag tag-spot">관광</span></div><div class="schedule-memo">류큐왕국 세계유산 / 8:30AM~6:30PM</div></div></div>
+      <div class="schedule-item"><div class="schedule-time">11:30</div><div class="schedule-content"><div class="schedule-title">🍜 슈리소바 <span class="tag tag-meal">점심</span></div><div class="schedule-memo">슈리성 바로 옆 현지 맛집 / 11AM~2PM / 현금만 / 월요일 영업 ✅</div></div></div>
+      <div class="schedule-item"><div class="schedule-time">13:00</div><div class="schedule-content"><div class="schedule-title">🛍️ 국제거리 쇼핑 <span class="tag tag-spot">관광</span></div><div class="schedule-memo">베니모 타르트·기념품 구매</div></div></div>
+      <div class="schedule-item"><div class="schedule-time">14:30</div><div class="schedule-content"><div class="schedule-title">🚗 차탄 복귀</div><div class="schedule-memo"></div></div></div>
+      <div class="schedule-item"><div class="schedule-time">15:30</div><div class="schedule-content"><div class="schedule-title">🎮 포켓몬 센터 오키나와 <span class="tag tag-spot">관광</span></div><div class="schedule-memo">이온몰 라이카무 1F / 10AM~10PM / 오키나와 한정 굿즈 🔥</div></div></div>
+      <div class="schedule-item"><div class="schedule-time">17:30</div><div class="schedule-content"><div class="schedule-title">🍔 A&W 버거 <span class="tag tag-meal">간식</span></div><div class="schedule-memo">루트비어 플로트 필수! / 24시간 / 엔화 현금</div></div></div>
+      <div class="schedule-item"><div class="schedule-time">19:30</div><div class="schedule-content"><div class="schedule-title">🐍 와후테이 장어덮밥 <span class="tag tag-meal">저녁</span></div><div class="schedule-memo">나하 오모로마치 / 11AM~9PM / 오리온 맥주 🍺</div></div></div>
+    </div>
+  </div>
+
+  <div class="day-block day-4">
+    <div class="day-header"><div class="day-num">DAY 4</div><div class="info"><div class="date">3월 31일 (화)</div><div class="theme">귀국 🏠</div></div></div>
+    <div class="day-body">
+      <div class="schedule-item"><div class="schedule-time">08:00</div><div class="schedule-content"><div class="schedule-title">🏪 편의점 아침 & 체크아웃</div><div class="schedule-memo"></div></div></div>
+      <div class="schedule-item"><div class="schedule-time">09:30</div><div class="schedule-content"><div class="schedule-title">🛍️ 차탄 막바지 쇼핑</div><div class="schedule-memo">베니모 타르트 추가 구매</div></div></div>
+      <div class="schedule-item"><div class="schedule-time">11:00</div><div class="schedule-content"><div class="schedule-title">🚗 우미카지 테라스 이동</div><div class="schedule-memo">차탄 → 우미카지 약 30분</div></div></div>
+      <div class="schedule-item"><div class="schedule-time">11:30</div><div class="schedule-content"><div class="schedule-title">🐟 오야지노 마구로 (참치 회덮밥) <span class="tag tag-meal">점심</span></div><div class="schedule-memo">우미카지 테라스 내 / 오션뷰+비행기 뷰 / 11AM~8:30PM</div></div></div>
+      <div class="schedule-item"><div class="schedule-time">12:30</div><div class="schedule-content"><div class="schedule-title">🚗 Oasis 렌트카 반납</div><div class="schedule-memo">나하공항 (우미카지 → 공항 5분!)</div></div></div>
+      <div class="schedule-item"><div class="schedule-time">13:30</div><div class="schedule-content"><div class="schedule-title">🛒 면세점 쇼핑</div><div class="schedule-memo"></div></div></div>
+      <div class="schedule-item"><div class="schedule-time">15:00</div><div class="schedule-content"><div class="schedule-title">✈️ 오키나와 출발</div><div class="schedule-memo">인천 도착 17:35</div></div></div>
+      <div class="schedule-item"><div class="schedule-time">21:35</div><div class="schedule-content"><div class="schedule-title">🚅 광명역 KTX 출발</div><div class="schedule-memo">익산 도착 22:36 🏠</div></div></div>
+    </div>
+  </div>
+</div>
+
+<div class="section-header"><div class="label">Food Plan</div><h2>식사 한눈에 보기 🍽️</h2></div>
+<section class="meals-section">
+  <div class="meals-grid">
+    <div class="meal-header">날짜</div><div class="meal-header">🌞 점심</div><div class="meal-header">🌙 저녁</div><div class="meal-header">🍡 간식·디저트</div>
+    <div class="meal-cell day-label">DAY 1</div><div class="meal-cell">—</div><div class="meal-cell">🥩 얏빠리스테이크</div><div class="meal-cell">☕ Zhyvago 카페</div>
+    <div class="meal-cell day-label">DAY 2</div><div class="meal-cell">🌮 타코라이스<br><small style="color:#999">Captain Kangaroo</small></div><div class="meal-cell">🏡 백년고가 우후야<br><small style="color:#c62828">예약 필수!</small></div><div class="meal-cell">🍦 블루실 아이스크림</div>
+    <div class="meal-cell day-label">DAY 3</div><div class="meal-cell">🍜 슈리소바</div><div class="meal-cell">🐍 와후테이 장어덮밥</div><div class="meal-cell">🍔 A&W 루트비어</div>
+    <div class="meal-cell day-label">DAY 4</div><div class="meal-cell">🐟 참치 회덮밥</div><div class="meal-cell">—</div><div class="meal-cell">—</div>
+  </div>
+</section>
+
+<div class="section-header"><div class="label">Map</div><h2>전체 여행 지도 🗺️</h2></div>
+
+<section style="padding: 0 20px 20px;">
+  <div style="max-width:900px; margin:0 auto; border-radius:24px; overflow:hidden; box-shadow:0 8px 40px rgba(0,50,100,0.12);">
+    <!-- Map Legend -->
+    <div style="background:white; padding:20px 28px; border-bottom:1px solid #e8f0f8; display:flex; flex-wrap:wrap; gap:12px; align-items:center;">
+      <span style="font-size:13px; font-weight:700; color:#1a1a2e; margin-right:4px;">📍 전체 스팟</span>
+      <span style="background:#e3f2fd; color:#1565c0; border-radius:20px; padding:4px 12px; font-size:12px; font-weight:600;">DAY1 차탄</span>
+      <span style="background:#e8f5e9; color:#2e7d32; border-radius:20px; padding:4px 12px; font-size:12px; font-weight:600;">DAY2 북부</span>
+      <span style="background:#f3e5f5; color:#6a1b9a; border-radius:20px; padding:4px 12px; font-size:12px; font-weight:600;">DAY3 나하</span>
+      <span style="background:#fff3e0; color:#e65100; border-radius:20px; padding:4px 12px; font-size:12px; font-weight:600;">DAY4 귀국</span>
+    </div>
+    <!-- Embedded Google Maps with all pins -->
+    <iframe       src="https://www.google.com/maps/d/embed?mid=1&z=10&ll=26.45,127.78&t=m&output=embed&q=Zhyvago+Coffee+Chatan+Okinawa|Yappari+Steak+Chatan|Cape+Manzamo+Okinawa|Captain+Kangaroo+Taco+Rice+Nago|Churaumi+Aquarium+Okinawa|Ufuya+Nago+Okinawa|Shuri+Castle+Naha|Shuri+Soba+Naha|Kokusai+Street+Naha|Pokemon+Center+Okinawa|A%26W+Misato+Okinawa|Umikaji+Terrace+Okinawa"
+      style="display:none"
+    ></iframe>
+    <!-- Custom map using static embed for each location -->
+    <div id="map-container" style="width:100%; height:520px; position:relative; background:#e8f0f8;">
+      <iframe         id="main-map"
+        src="https://maps.google.com/maps?q=26.45,127.78&z=10&output=embed&hl=ko"
+        style="width:100%; height:100%; border:none;"
+        allowfullscreen
+        loading="lazy"
+      ></iframe>
+    </div>
+    <!-- Place buttons -->
+    <div style="background:white; padding:16px 20px;">
+      <div style="font-size:12px; font-weight:700; color:#90a4b8; letter-spacing:1px; text-transform:uppercase; margin-bottom:12px;">장소 선택해서 지도 보기</div>
+      <div style="display:flex; flex-wrap:wrap; gap:8px;" id="place-buttons">
+        <button onclick="showMap('26.3158,127.7537','Zhyvago Coffee')" style="background:#e3f2fd;color:#1565c0;border:none;border-radius:20px;padding:6px 14px;font-size:12px;font-weight:600;cursor:pointer;">☕ Zhyvago (DAY1)</button>
+        <button onclick="showMap('26.3193,127.7591','얏빠리스테이크')" style="background:#e3f2fd;color:#1565c0;border:none;border-radius:20px;padding:6px 14px;font-size:12px;font-weight:600;cursor:pointer;">🥩 얏빠리스테이크 (DAY1)</button>
+        <button onclick="showMap('26.5052,127.8505','만좌모')" style="background:#e8f5e9;color:#2e7d32;border:none;border-radius:20px;padding:6px 14px;font-size:12px;font-weight:600;cursor:pointer;">🌊 만좌모 (DAY2)</button>
+        <button onclick="showMap('26.5953,127.9582','Captain Kangaroo')" style="background:#e8f5e9;color:#2e7d32;border:none;border-radius:20px;padding:6px 14px;font-size:12px;font-weight:600;cursor:pointer;">🌮 타코라이스 (DAY2)</button>
+        <button onclick="showMap('26.6943,127.8780','추라우미 수족관')" style="background:#e8f5e9;color:#2e7d32;border:none;border-radius:20px;padding:6px 14px;font-size:12px;font-weight:600;cursor:pointer;">🐳 추라우미 (DAY2)</button>
+        <button onclick="showMap('26.6210,127.9637','백년고가 우후야')" style="background:#e8f5e9;color:#2e7d32;border:none;border-radius:20px;padding:6px 14px;font-size:12px;font-weight:600;cursor:pointer;">🏡 우후야 (DAY2)</button>
+        <button onclick="showMap('26.2170,127.7195','슈리성')" style="background:#f3e5f5;color:#6a1b9a;border:none;border-radius:20px;padding:6px 14px;font-size:12px;font-weight:600;cursor:pointer;">🏯 슈리성 (DAY3)</button>
+        <button onclick="showMap('26.2175,127.7228','슈리소바')" style="background:#f3e5f5;color:#6a1b9a;border:none;border-radius:20px;padding:6px 14px;font-size:12px;font-weight:600;cursor:pointer;">🍜 슈리소바 (DAY3)</button>
+        <button onclick="showMap('26.2151,127.6847','국제거리')" style="background:#f3e5f5;color:#6a1b9a;border:none;border-radius:20px;padding:6px 14px;font-size:12px;font-weight:600;cursor:pointer;">🛍️ 국제거리 (DAY3)</button>
+        <button onclick="showMap('26.3141,127.7963','포켓몬센터')" style="background:#f3e5f5;color:#6a1b9a;border:none;border-radius:20px;padding:6px 14px;font-size:12px;font-weight:600;cursor:pointer;">🎮 포켓몬센터 (DAY3)</button>
+        <button onclick="showMap('26.3483,127.8248','A&W 버거')" style="background:#f3e5f5;color:#6a1b9a;border:none;border-radius:20px;padding:6px 14px;font-size:12px;font-weight:600;cursor:pointer;">🍔 A&W (DAY3)</button>
+        <button onclick="showMap('26.2185,127.6952','와후테이')" style="background:#f3e5f5;color:#6a1b9a;border:none;border-radius:20px;padding:6px 14px;font-size:12px;font-weight:600;cursor:pointer;">🐍 와후테이 (DAY3)</button>
+        <button onclick="showMap('26.1769,127.6405','오야지노 마구로')" style="background:#fff3e0;color:#e65100;border:none;border-radius:20px;padding:6px 14px;font-size:12px;font-weight:600;cursor:pointer;">🐟 오야지노 마구로 (DAY4)</button>
+        <button onclick="showMap('26.1767,127.6404','우미카지 테라스')" style="background:#fff3e0;color:#e65100;border:none;border-radius:20px;padding:6px 14px;font-size:12px;font-weight:600;cursor:pointer;">🌊 우미카지 테라스 (DAY4)</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+function showMap(coords, name) {
+  const iframe = document.getElementById('main-map');
+  const [lat, lng] = coords.split(',');
+  iframe.src = `https://maps.google.com/maps?q=${lat},${lng}&z=16&output=embed&hl=ko`;
+  // highlight active button
+  document.querySelectorAll('#place-buttons button').forEach(b => b.style.opacity='0.6');
+  event.target.style.opacity='1';
+  event.target.style.outline='2px solid #0077b6';
+}
+</script>
+
+<div class="section-header"><div class="label">Tips</div><h2>여행 꿀팁 💡</h2></div>
+<section class="tips-section">
+  <div class="tips-grid">
+    <div class="tip-card"><h4>📋 사전 준비</h4><ul><li>우후야 예약 — ufuya.com (필수!)</li><li>추라우미 수족관 클룩 선구매</li><li>광명 도심공항으로 수하물 미리 위탁</li><li>현금(엔화) — A&W, 슈리소바 현금만</li></ul></div>
+    <div class="tip-card"><h4>🍺 오키나와 식문화</h4><ul><li>오리온 맥주 & 아와모리 꼭 체험!</li><li>베니모 타르트 = 필수 귀국 기념품</li><li>아구돼지 샤브샤브 = 우후야 하이라이트</li><li>타코라이스 = 오키나와 소울푸드</li></ul></div>
+    <div class="tip-card"><h4>🎮 아이와 함께</h4><ul><li>포켓몬센터 평일(월) 방문이 한산</li><li>한정 굿즈 오픈 시간 맞춰 방문 추천</li><li>추라우미 고래상어 = 아이 최고 인기</li><li>돌고래 쇼 무료, 시간표 현장 확인</li></ul></div>
+    <div class="tip-card"><h4>🚗 렌트카·주차 팁</h4><ul><li>오키나와는 본토와 반대로 좌측통행 — 처음엔 천천히</li><li>주요 관광지 주차장은 대부분 무료 또는 저렴</li><li>내비는 Google Maps 한국어 설정 추천</li><li>추라우미 수족관 주차장은 주말 만차 — 오전 도착 추천</li><li>국제거리 주변 유료 주차, 근처 이온몰 주차 후 도보 추천</li></ul></div>
+    <div class="tip-card"><h4>💴 환전·결제 팁</h4><ul><li>슈리소바·A&W 일부 매장은 현금만 — 엔화 꼭 준비</li><li>환전은 출발 전 은행 우대환율로 미리 해두기</li><li>편의점 ATM(세븐일레븐·패밀리마트)에서 인출 가능</li><li>대형 식당·수족관은 카드 OK, 소규모는 현금 안전</li><li>1인당 3~5만엔 현금 준비 권장</li></ul></div>
+    <div class="tip-card"><h4>🌤️ 날씨·옷차림 팁</h4><ul><li>3월 말 오키나와 평균 기온 18~23°C — 한국 초여름 느낌</li><li>낮엔 반팔+얇은 겉옷, 아침저녁엔 가디건 필수</li><li>자외선 매우 강함 — SPF 50+ 선크림 필수!</li><li>갑작스러운 비에 대비해 접이식 우산 챙기기</li><li>바닷가·수족관 방문 시 여벌 옷 준비 추천</li></ul></div>
+  </div>
+
+  <!-- 쇼핑 리스트 -->
+  <div style="max-width:900px; margin:32px auto 0; background:white; border-radius:20px; padding:28px 32px; box-shadow:0 4px 24px rgba(0,100,180,0.08);">
+    <h4 style="font-size:16px; font-weight:700; color:#1E6BA1; margin-bottom:20px;">🛍️ 오키나와에서 꼭 사야 할 것들</h4>
+    <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(240px, 1fr)); gap:20px;">
+
+      <div>
+        <div style="font-size:12px; font-weight:700; color:#e07a5f; letter-spacing:1.5px; text-transform:uppercase; margin-bottom:10px; padding-bottom:6px; border-bottom:2px solid #fde8e3;">🍬 먹거리·간식</div>
+        <ul style="list-style:none; padding:0;">
+          <li style="font-size:13px; color:#333; padding:5px 0; border-bottom:1px solid #f5f5f5; padding-left:16px; position:relative;"><span style="position:absolute;left:0;color:#e07a5f;">•</span><strong>베니모 타르트</strong> — 자색고구마 타르트, 오키나와 대표 기념품</li>
+          <li style="font-size:13px; color:#333; padding:5px 0; border-bottom:1px solid #f5f5f5; padding-left:16px; position:relative;"><span style="position:absolute;left:0;color:#e07a5f;">•</span><strong>치인수</strong> — 오키나와 전통 과자, 흑설탕·참깨 맛</li>
+          <li style="font-size:13px; color:#333; padding:5px 0; border-bottom:1px solid #f5f5f5; padding-left:16px; position:relative;"><span style="position:absolute;left:0;color:#e07a5f;">•</span><strong>사타안다기</strong> — 오키나와 도넛, 국제거리 노점 갓 튀긴 거 추천</li>
+          <li style="font-size:13px; color:#333; padding:5px 0; border-bottom:1px solid #f5f5f5; padding-left:16px; position:relative;"><span style="position:absolute;left:0;color:#e07a5f;">•</span><strong>베니모 과자류</strong> — 칩·양갱·쿠키 등 종류 다양</li>
+          <li style="font-size:13px; color:#333; padding:5px 0; padding-left:16px; position:relative;"><span style="position:absolute;left:0;color:#e07a5f;">•</span><strong>오리온 맥주 캔</strong> — 귀국 전 공항 면세점·슈퍼에서 구매</li>
+        </ul>
+      </div>
+
+      <div>
+        <div style="font-size:12px; font-weight:700; color:#2d6a4f; letter-spacing:1.5px; text-transform:uppercase; margin-bottom:10px; padding-bottom:6px; border-bottom:2px solid #d8f0e3;">🧴 생활용품·기념품</div>
+        <ul style="list-style:none; padding:0;">
+          <li style="font-size:13px; color:#333; padding:5px 0; border-bottom:1px solid #f5f5f5; padding-left:16px; position:relative;"><span style="position:absolute;left:0;color:#2d6a4f;">•</span><strong>류큐 유리공예품</strong> — 오키나와 전통 유리 컵·접시, 국제거리 공방</li>
+          <li style="font-size:13px; color:#333; padding:5px 0; border-bottom:1px solid #f5f5f5; padding-left:16px; position:relative;"><span style="position:absolute;left:0;color:#2d6a4f;">•</span><strong>선크림</strong> — 일본 선크림 퀄리티 최고, 마츠모토키요시 추천</li>
+          <li style="font-size:13px; color:#333; padding:5px 0; border-bottom:1px solid #f5f5f5; padding-left:16px; position:relative;"><span style="position:absolute;left:0;color:#2d6a4f;">•</span><strong>시사 도자기 인형</strong> — 오키나와 수호신, 집 장식용 기념품</li>
+          <li style="font-size:13px; color:#333; padding:5px 0; padding-left:16px; position:relative;"><span style="position:absolute;left:0;color:#2d6a4f;">•</span><strong>누치마스 소금</strong> — 미네랄 풍부한 오키나와 명품 소금</li>
+        </ul>
+      </div>
+
+      <div>
+        <div style="font-size:12px; font-weight:700; color:#7b2d8b; letter-spacing:1.5px; text-transform:uppercase; margin-bottom:10px; padding-bottom:6px; border-bottom:2px solid #f0d9f5;">🎮 아이 선물</div>
+        <ul style="list-style:none; padding:0;">
+          <li style="font-size:13px; color:#333; padding:5px 0; border-bottom:1px solid #f5f5f5; padding-left:16px; position:relative;"><span style="position:absolute;left:0;color:#7b2d8b;">•</span><strong>포켓몬 오키나와 한정 굿즈</strong> — 히비스커스·바다 테마 / 포켓몬센터</li>
+          <li style="font-size:13px; color:#333; padding:5px 0; border-bottom:1px solid #f5f5f5; padding-left:16px; position:relative;"><span style="position:absolute;left:0;color:#7b2d8b;">•</span><strong>알로라 나시 인형</strong> — 오키나와 한정 알로라 엑스에그큐터</li>
+          <li style="font-size:13px; color:#333; padding:5px 0; border-bottom:1px solid #f5f5f5; padding-left:16px; position:relative;"><span style="position:absolute;left:0;color:#7b2d8b;">•</span><strong>포켓몬 TCG 카드팩</strong> — 면세라 저렴 / 구매 수량 제한 있음</li>
+          <li style="font-size:13px; color:#333; padding:5px 0; padding-left:16px; position:relative;"><span style="position:absolute;left:0;color:#7b2d8b;">•</span><strong>수족관 숍 문구·스티커</strong> — 추라우미 수족관 기념품 숍</li>
+        </ul>
+      </div>
+
+      <div>
+        <div style="font-size:12px; font-weight:700; color:#0077b6; letter-spacing:1.5px; text-transform:uppercase; margin-bottom:10px; padding-bottom:6px; border-bottom:2px solid #d0eaf8;">📍 구매 장소</div>
+        <ul style="list-style:none; padding:0;">
+          <li style="font-size:13px; color:#333; padding:5px 0; border-bottom:1px solid #f5f5f5; padding-left:16px; position:relative;"><span style="position:absolute;left:0;color:#0077b6;">•</span><strong>국제거리</strong> — 기념품 가장 다양, DAY3 쇼핑 타임 활용</li>
+          <li style="font-size:13px; color:#333; padding:5px 0; border-bottom:1px solid #f5f5f5; padding-left:16px; position:relative;"><span style="position:absolute;left:0;color:#0077b6;">•</span><strong>나하공항 면세점</strong> — 베니모 타르트·오리온 맥주·화장품</li>
+          <li style="font-size:13px; color:#333; padding:5px 0; border-bottom:1px solid #f5f5f5; padding-left:16px; position:relative;"><span style="position:absolute;left:0;color:#0077b6;">•</span><strong>이온몰 라이카무</strong> — 포켓몬센터·드럭스토어 함께 이용</li>
+          <li style="font-size:13px; color:#333; padding:5px 0; padding-left:16px; position:relative;"><span style="position:absolute;left:0;color:#0077b6;">•</span><strong>온니손 (御菓子御殿)</strong> — 베니모 타르트 원조 맛집, 국제거리 내</li>
+        </ul>
+      </div>
+
+    </div>
+    <div style="margin-top:16px; background:#f0f9ff; border-radius:12px; padding:12px 16px; font-size:13px; color:#1565c0;">
+      💡 <strong>쇼핑 팁:</strong> 베니모 타르트는 냉장 보관이라 귀국 당일 공항에서 사는 게 제일 신선해요! 국제거리보다 공항이 오히려 저렴한 경우도 많아요.
+    </div>
+  </div>
+
+</section>
+
+<footer><strong>🌺 오키나와 여행 2026</strong> &nbsp;|&nbsp; 3월 28일 ~ 31일 &nbsp;|&nbsp; 즐거운 여행 되세요! ✈️</footer>
+
+</body>
+</html>
