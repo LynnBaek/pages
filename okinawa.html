@@ -108,6 +108,30 @@
   .tag-travel { background: #e3f2fd; color: #1565c0; }
   .tag-alert { background: #fce4ec; color: #c62828; }
 
+  /* 호버 사진 툴팁 */
+  .schedule-item { position: relative; }
+  .photo-tooltip {
+    display: none;
+    position: absolute;
+    left: 50%; top: 50%;
+    transform: translate(-50%, -110%);
+    width: 220px;
+    background: white;
+    border-radius: 14px;
+    box-shadow: 0 8px 32px rgba(0,50,100,0.18);
+    overflow: hidden;
+    z-index: 999;
+    pointer-events: none;
+  }
+  .photo-tooltip img {
+    width: 100%; height: 140px; object-fit: cover; display: block;
+  }
+  .photo-tooltip .pt-label {
+    padding: 8px 12px; font-size: 12px; font-weight: 600; color: #333;
+    background: white; line-height: 1.3;
+  }
+  .schedule-item:hover .photo-tooltip { display: block; }
+
   .meals-section { padding: 0 20px 40px; }
   .meals-grid { max-width: 900px; margin: 0 auto; display: grid; grid-template-columns: repeat(4, 1fr); border-radius: 20px; overflow: hidden; box-shadow: 0 4px 24px rgba(0,100,180,0.1); border: 1px solid #dde8f5; }
   .meal-header { background: linear-gradient(135deg, var(--ocean), var(--sky)); color: white; padding: 14px 10px; text-align: center; font-size: 12px; font-weight: 700; letter-spacing: 0.5px; }
@@ -144,6 +168,25 @@
   .tab-btn:hover { color: var(--ocean); }
   .tab-page { display: none; }
   .tab-page.active { display: block; }
+
+  /* DAY 탭 */
+  .day-tab-nav {
+    display: flex; max-width: 900px; margin: 0 auto 24px;
+    padding: 0 20px; gap: 8px; flex-wrap: wrap;
+  }
+  .day-tab-btn {
+    padding: 8px 20px; font-size: 13px; font-weight: 700;
+    border: 2px solid #e8f0f8; border-radius: 50px;
+    background: white; color: #90a4b8; cursor: pointer;
+    font-family: 'Noto Sans KR', sans-serif; transition: all 0.2s;
+  }
+  .day-tab-btn:hover { border-color: var(--ocean); color: var(--ocean); }
+  .day-tab-btn.d1.active { background: linear-gradient(135deg,#0077b6,#00b4d8); color: white; border-color: transparent; }
+  .day-tab-btn.d2.active { background: linear-gradient(135deg,#2d6a4f,#52b788); color: white; border-color: transparent; }
+  .day-tab-btn.d3.active { background: linear-gradient(135deg,#7b2d8b,#c77dff); color: white; border-color: transparent; }
+  .day-tab-btn.d4.active { background: linear-gradient(135deg,#e07a5f,#f4a261); color: white; border-color: transparent; }
+  .day-page { display: none; }
+  .day-page.active { display: block; }
     .meals-grid { grid-template-columns: repeat(2, 1fr); }
     .day-header { flex-direction: column; align-items: flex-start; gap: 10px; }
   }
@@ -181,7 +224,16 @@
 
 <div class="section-header"><div class="label">Day by Day</div><h2>여행 일정</h2></div>
 
+<!-- DAY 탭 버튼 -->
+<div class="day-tab-nav">
+  <button class="day-tab-btn d1 active" onclick="switchDay('day1', this)">DAY 1 · 3/28 토</button>
+  <button class="day-tab-btn d2" onclick="switchDay('day2', this)">DAY 2 · 3/29 일</button>
+  <button class="day-tab-btn d3" onclick="switchDay('day3', this)">DAY 3 · 3/30 월</button>
+  <button class="day-tab-btn d4" onclick="switchDay('day4', this)">DAY 4 · 3/31 화</button>
+</div>
+
 <div class="days">
+  <div id="day-day1" class="day-page active">
   <div class="day-block day-1">
     <div class="day-header"><div class="day-num">DAY 1</div><div class="info"><div class="date">3월 28일 (토)</div><div class="theme">도착 & 차탄 첫날 🌅</div></div></div>
     <div class="day-body">
@@ -189,64 +241,75 @@
       <div class="schedule-item"><div class="schedule-time">07:30</div><div class="schedule-content"><div class="schedule-title">🏢 광명 도심공항 체크인</div><div class="schedule-memo">수하물 위탁 후 리무진 → 인천공항</div></div></div>
       <div class="schedule-item"><div class="schedule-time">11:25</div><div class="schedule-content"><div class="schedule-title">✈️ 인천공항 출발 <span class="tag tag-travel">항공</span></div><div class="schedule-memo">나하 도착 14:00</div></div></div>
       <div class="schedule-item"><div class="schedule-time">15:00</div><div class="schedule-content"><div class="schedule-title">🚗 Oasis 렌트카 픽업 <span class="tag tag-travel">교통</span></div><div class="schedule-memo">나하공항 / 차탄까지 약 40분</div></div></div>
-      <div class="schedule-item"><div class="schedule-time">16:00</div><div class="schedule-content"><div class="schedule-title">🏨 더 호텔 차탄 체크인 & 휴식</div><div class="schedule-memo"></div></div></div>
-      <div class="schedule-item"><div class="schedule-time">17:00</div><div class="schedule-content"><div class="schedule-title">☕ Zhyvago Coffee Works <span class="tag tag-meal">카페</span></div><div class="schedule-memo">아메리칸 빌리지 오션뷰 카페 / 8AM~8PM</div></div></div>
-      <div class="schedule-item"><div class="schedule-time">17:30</div><div class="schedule-content"><div class="schedule-title">🌅 아메리칸 빌리지 산책 <span class="tag tag-spot">관광</span></div><div class="schedule-memo">석양 & 야경 명소</div></div></div>
-      <div class="schedule-item"><div class="schedule-time">19:30</div><div class="schedule-content"><div class="schedule-title">🥩 얏빠리스테이크 차탄점 <span class="tag tag-meal">저녁</span></div><div class="schedule-memo">무한 라이스·수프 / 오리온 맥주 🍺 / 11AM~9:30PM</div></div></div>
+      <div class="schedule-item"><div class="schedule-time">16:00</div><div class="schedule-content"><div class="schedule-title">🏨 더 호텔 차탄 체크인 & 휴식</div><div class="schedule-memo"></div></div><div class="photo-tooltip"><img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?w=400&q=80"><div class="pt-label">🏨 더 호텔 차탄 바이 선레스트</div></div></div>
+      <div class="schedule-item"><div class="schedule-time">17:00</div><div class="schedule-content"><div class="schedule-title">☕ Zhyvago Coffee Works <span class="tag tag-meal">카페</span></div><div class="schedule-memo">아메리칸 빌리지 오션뷰 카페 / 8AM~8PM</div></div><div class="photo-tooltip"><img src="https://lh3.googleusercontent.com/places/ANXAkqEzjRX4hxE-1EtAgdkGX2c91HWGWLyczAmJVO-rxr7CujG-Gf7T9zm_9joLOP6sfto42ExNIxMKI8AA8kCxhhXfSLSAxlGIbFk=s800-w400-h300"><div class="pt-label">☕ Zhyvago Coffee Works</div></div></div>
+      <div class="schedule-item"><div class="schedule-time">17:30</div><div class="schedule-content"><div class="schedule-title">🌅 아메리칸 빌리지 산책 <span class="tag tag-spot">관광</span></div><div class="schedule-memo">석양 & 야경 명소</div></div><div class="photo-tooltip"><img src="https://images.unsplash.com/photo-1542051841857-5f90071e7989?w=400&q=80"><div class="pt-label">🌅 아메리칸 빌리지 석양</div></div></div>
+      <div class="schedule-item"><div class="schedule-time">19:30</div><div class="schedule-content"><div class="schedule-title">🐉 차탄드래곤 야키니쿠 <span class="tag tag-meal">저녁</span><a class="map-btn" href="https://www.google.com/maps/dir/?api=1&destination=26.3010,127.7609&travelmode=driving" target="_blank">🗺️ 지도</a></div><div class="schedule-memo">차탄 야키니쿠 맛집 / 오리온 맥주 🍺</div></div><div class="photo-tooltip"><img src="https://images.unsplash.com/photo-1529692236671-f1f6cf9683ba?w=400&q=80"><div class="pt-label">🐉 차탄드래곤 야키니쿠</div></div></div>
     </div>
   </div>
+  </div><!-- /day-day1 -->
 
+  <div id="day-day2" class="day-page">
   <div class="day-block day-2">
-    <div class="day-header"><div class="day-num">DAY 2</div><div class="info"><div class="date">3월 29일 (일)</div><div class="theme">북부 드라이브 + 우후야 🐳</div></div></div>
+    <div class="day-header"><div class="day-num">DAY 2</div><div class="info"><div class="date">3월 29일 (일)</div><div class="theme">북부 드라이브 + 수족관 🐳</div></div></div>
     <div class="day-body">
       <div class="schedule-item"><div class="schedule-time">08:00</div><div class="schedule-content"><div class="schedule-title">🏪 편의점 아침</div><div class="schedule-memo"></div></div></div>
-      <div class="schedule-item"><div class="schedule-time">08:30</div><div class="schedule-content"><div class="schedule-title">🚗 북부 드라이브 출발 <span class="tag tag-travel">교통</span></div><div class="schedule-memo">차탄 → 만좌모 약 1시간</div></div></div>
-      <div class="schedule-item"><div class="schedule-time">10:00</div><div class="schedule-content"><div class="schedule-title">🌊 만좌모 (Cape Manzamo) <span class="tag tag-spot">관광</span></div><div class="schedule-memo">입장 100엔 / 코끼리 바위 절경 / 30~40분</div></div></div>
-      <div class="schedule-item"><div class="schedule-time">11:00</div><div class="schedule-content"><div class="schedule-title">🌮 Captain Kangaroo 타코라이스 <span class="tag tag-meal">점심</span></div><div class="schedule-memo">오션뷰 맛집 / 일요일 영업 ✅ / 11AM~4PM (화·수 휴무)</div></div></div>
-      <div class="schedule-item"><div class="schedule-time">13:00</div><div class="schedule-content"><div class="schedule-title">🐳 추라우미 수족관 <span class="tag tag-spot">관광</span></div><div class="schedule-memo">고래상어·만타레이! 2~3시간 / 클룩 선구매 강추</div></div></div>
-      <div class="schedule-item"><div class="schedule-time">15:30</div><div class="schedule-content"><div class="schedule-title">🐬 야외 돌고래 쇼</div><div class="schedule-memo">무료 / 현장 시간표 확인</div></div></div>
-      <div class="schedule-item"><div class="schedule-time">16:00</div><div class="schedule-content"><div class="schedule-title">🍦 블루실 아이스크림 <span class="tag tag-meal">간식</span></div><div class="schedule-memo">수족관 내 / 베니모(자색고구마) 맛 강추</div></div></div>
-      <div class="schedule-item"><div class="schedule-time">17:30</div><div class="schedule-content"><div class="schedule-title">🏡 백년고가 우후야 <span class="tag tag-meal">저녁</span> <span class="tag tag-alert">예약필수</span></div><div class="schedule-memo">아구 샤브샤브·오키나와 소바 / ufuya.com / 17:30 오픈런! / 라스트오더 20:15</div></div></div>
-      <div class="schedule-item"><div class="schedule-time">19:30</div><div class="schedule-content"><div class="schedule-title">🚗 차탄 복귀</div><div class="schedule-memo">약 1시간 20분</div></div></div>
+      <div class="schedule-item"><div class="schedule-time">08:30</div><div class="schedule-content"><div class="schedule-title">🚗 북부 출발 <span class="tag tag-travel">교통</span></div><div class="schedule-memo">차탄 → 우후야 약 1시간 20분</div></div></div>
+      <div class="schedule-item"><div class="schedule-time">10:30</div><div class="schedule-content"><div class="schedule-title">🏡 백년고가 우후야 웨이팅 <span class="tag tag-alert">웨이팅</span><a class="map-btn" href="https://www.google.com/maps/dir/?api=1&destination=26.6210,127.9637&travelmode=driving" target="_blank">🗺️ 지도</a></div><div class="schedule-memo">오픈 11:00 / 웨이팅 1~2시간 예상 / 일찍 도착 필수!</div></div><div class="photo-tooltip"><img src="https://lh3.googleusercontent.com/places/ANXAkqH9THV6MNTvdX48KILu2yq-SSVfjp200_Yzj7Y0X1NsRmwZLaOlSHlZtp-AJDgBGIhBzWnS8gKwOncWatBdu2MPtFy_bFIGlDg=s800-w400-h300"><div class="pt-label">🏡 백년고가 우후야</div></div></div>
+      <div class="schedule-item"><div class="schedule-time">11:30</div><div class="schedule-content"><div class="schedule-title">🍜 백년고가 우후야 <span class="tag tag-meal">점심</span><a class="map-btn" href="https://www.google.com/maps/dir/?api=1&destination=26.6210,127.9637&travelmode=driving" target="_blank">🗺️ 지도</a></div><div class="schedule-memo">아구 샤브샤브·오키나와 소바 / 11AM~3:30PM</div></div><div class="photo-tooltip"><img src="https://lh3.googleusercontent.com/places/ANXAkqEDe-KOEagwgffTDxpJ73LSWHZyHoiMFKvXcQVPFWV2T4PC98H2gkTqfua02GriGq_OLujXeHssHcUThOJbpWUXuKXmQegBWuI=s800-w400-h300"><div class="pt-label">🍜 아구 샤브샤브·오키나와 소바</div></div></div>
+      <div class="schedule-item"><div class="schedule-time">13:00</div><div class="schedule-content"><div class="schedule-title">🚗 추라우미 수족관 이동 <span class="tag tag-travel">교통</span></div><div class="schedule-memo">우후야 → 수족관 약 25~30분</div></div></div>
+      <div class="schedule-item"><div class="schedule-time">13:30</div><div class="schedule-content"><div class="schedule-title">🐳 추라우미 수족관 <span class="tag tag-spot">관광</span><a class="map-btn" href="https://www.google.com/maps/dir/?api=1&destination=26.6943,127.8780&travelmode=driving" target="_blank">🗺️ 지도</a></div><div class="schedule-memo">고래상어·만타레이! 2~3시간 / 클룩 선구매 강추</div></div><div class="photo-tooltip"><img src="https://lh3.googleusercontent.com/places/ANXAkqHscxsDEBoI0lfswdHikZF4jhp7HwbFdRkC8Ehg19T7Hw0RMZJWx1PIPNRB7VSDwGyLXhpxHtFiudaTVTff3Uoef54LFLsLihvUXPfNIQkl18XJSzjg1G2COkjIwYfrWDbC8w0MSMn2vuMnPQ--CUjWww=s800-w400-h300"><div class="pt-label">🐳 추라우미 수족관</div></div></div>
+      <div class="schedule-item"><div class="schedule-time">15:30</div><div class="schedule-content"><div class="schedule-title">🐬 야외 돌고래 쇼<a class="map-btn" href="https://www.google.com/maps/dir/?api=1&destination=26.6943,127.8780&travelmode=driving" target="_blank">🗺️ 지도</a></div><div class="schedule-memo">무료 / 현장 시간표 확인</div></div><div class="photo-tooltip"><img src="https://images.unsplash.com/photo-1564349683136-77e08dba1ef7?w=400&q=80"><div class="pt-label">🐬 야외 돌고래 쇼</div></div></div>
+      <div class="schedule-item"><div class="schedule-time">16:00</div><div class="schedule-content"><div class="schedule-title">🍦 블루실 아이스크림 <span class="tag tag-meal">간식</span><a class="map-btn" href="https://www.google.com/maps/dir/?api=1&destination=26.6943,127.8780&travelmode=driving" target="_blank">🗺️ 지도</a></div><div class="schedule-memo">수족관 내 / 베니모(자색고구마) 맛 강추</div></div><div class="photo-tooltip"><img src="https://images.unsplash.com/photo-1567206563114-c179ce67abd2?w=400&q=80"><div class="pt-label">🍦 블루실 아이스크림</div></div></div>
+      <div class="schedule-item"><div class="schedule-time">16:30</div><div class="schedule-content"><div class="schedule-title">🚗 만좌모 이동 <span class="tag tag-travel">교통</span></div><div class="schedule-memo">수족관 → 만좌모 약 40분</div></div></div>
+      <div class="schedule-item"><div class="schedule-time">17:10</div><div class="schedule-content"><div class="schedule-title">🌊 만좌모 (Cape Manzamo) <span class="tag tag-spot">관광</span><a class="map-btn" href="https://www.google.com/maps/dir/?api=1&destination=26.5052,127.8505&travelmode=driving" target="_blank">🗺️ 지도</a></div><div class="schedule-memo">입장 100엔 / 일몰 뷰 🌅 / 30~40분</div></div><div class="photo-tooltip"><img src="https://lh3.googleusercontent.com/places/ANXAkqGNxcN2wqtlp0EsgDP1oO0ZmRLA8wnwriLTEVhw9PYrDSpObIiCx0iSl22HlqAW-7b63dDUs48Y7xngAOm5hR5JDFG3gKm6TSu3Mo6iRs9uPLrSrobX5NErW7Q4KCFiwPP5PRehMCLCMcoS2bV9yvB5gA=s800-w400-h300"><div class="pt-label">🌊 만좌모 절경</div></div></div>
+      <div class="schedule-item"><div class="schedule-time">18:00</div><div class="schedule-content"><div class="schedule-title">🚗 차탄 복귀 <span class="tag tag-travel">교통</span></div><div class="schedule-memo">만좌모 → 차탄 약 1시간</div></div></div>
+      <div class="schedule-item"><div class="schedule-time">19:30</div><div class="schedule-content"><div class="schedule-title">🐟 카이센 바텐 <span class="tag tag-meal">저녁</span><a class="map-btn" href="https://www.google.com/maps/dir/?api=1&destination=26.3190,127.7592&travelmode=driving" target="_blank">🗺️ 지도</a></div><div class="schedule-memo">차탄 해산물 이자카야 / 5PM~10PM (월 휴무) / 오리온 맥주 🍺</div></div><div class="photo-tooltip"><img src="https://lh3.googleusercontent.com/places/ANXAkqFBYqrqGyfFBEsvp3tcpTRfHK2ZkOLAjk3YVZVwnYDygxGzFR3g5bXBl-bdZDmwU7evcEZnxCql_Shg0I-04PwquJAufFgfVmE=s800-w400-h300" onerror="this.src='https://images.unsplash.com/photo-1579871494447-9811cf80d66c?w=400&q=80'"><div class="pt-label">🐟 카이센 바텐 해산물</div></div></div>
+      <div class="schedule-item"><div class="schedule-time">21:30</div><div class="schedule-content"><div class="schedule-title">🏨 숙소 복귀 <span class="tag tag-travel">교통</span><a class="map-btn" href="https://www.google.com/maps/dir/?api=1&destination=26.3184,127.7573&travelmode=driving" target="_blank">🗺️ 지도</a></div><div class="schedule-memo">더 호텔 차탄 바이 선레스트 리조트 / 도보 5분</div></div></div>
     </div>
   </div>
+  </div><!-- /day-day2 -->
 
+  <div id="day-day3" class="day-page">
   <div class="day-block day-3">
     <div class="day-header"><div class="day-num">DAY 3</div><div class="info"><div class="date">3월 30일 (월)</div><div class="theme">나하 관광 + 포켓몬센터 🎮</div></div></div>
     <div class="day-body">
       <div class="schedule-item"><div class="schedule-time">08:00</div><div class="schedule-content"><div class="schedule-title">🏪 편의점 아침</div><div class="schedule-memo"></div></div></div>
       <div class="schedule-item"><div class="schedule-time">09:00</div><div class="schedule-content"><div class="schedule-title">🚗 나하 출발 <span class="tag tag-travel">교통</span></div><div class="schedule-memo">차탄 → 나하 약 40분</div></div></div>
-      <div class="schedule-item"><div class="schedule-time">10:00</div><div class="schedule-content"><div class="schedule-title">🏯 슈리성 <span class="tag tag-spot">관광</span></div><div class="schedule-memo">류큐왕국 세계유산 / 8:30AM~6:30PM</div></div></div>
-      <div class="schedule-item"><div class="schedule-time">11:30</div><div class="schedule-content"><div class="schedule-title">🍜 슈리소바 <span class="tag tag-meal">점심</span></div><div class="schedule-memo">슈리성 바로 옆 현지 맛집 / 11AM~2PM / 현금만 / 월요일 영업 ✅</div></div></div>
-      <div class="schedule-item"><div class="schedule-time">13:00</div><div class="schedule-content"><div class="schedule-title">🛍️ 국제거리 쇼핑 <span class="tag tag-spot">관광</span></div><div class="schedule-memo">베니모 타르트·기념품 구매</div></div></div>
+      <div class="schedule-item"><div class="schedule-time">10:00</div><div class="schedule-content"><div class="schedule-title">🏯 슈리성 <span class="tag tag-spot">관광</span></div><div class="schedule-memo">류큐왕국 세계유산 / 8:30AM~6:30PM</div></div><div class="photo-tooltip"><img src="https://lh3.googleusercontent.com/places/ANXAkqGze_F2P02wtNUHn9tTZTjf3er_qCTuyzpHp12_BPFpKGSXlWPSPTmnvHoWlIwab-7HO1ycNUoT-iQdSsDQ69dcohjZMlUqWxemqqNwzF5EhFAsqGJ0dgHuVp7KyqSAtpY0H63sB1SPo9L7sO-fcoJx8w=s800-w400-h300"><div class="pt-label">🏯 슈리성</div></div></div>
+      <div class="schedule-item"><div class="schedule-time">11:30</div><div class="schedule-content"><div class="schedule-title">🍜 슈리소바 <span class="tag tag-meal">점심</span></div><div class="schedule-memo">슈리성 바로 옆 현지 맛집 / 11AM~2PM / 현금만 / 월요일 영업 ✅</div></div><div class="photo-tooltip"><img src="https://lh3.googleusercontent.com/places/ANXAkqEBPxE4Y_DzqQBnJ-p38AYtbREjDJYe_oA42x7fyNy0EaAOD6lJPvv0k2No2a8Ka6v63H1Agx_cXN14I8FPNpoPT79Ga0duswNP9HOsy_N_sh-ytZN2VekkcKbzP_e3evPzZ02hprZGZmXOhw=s800-w400-h300"><div class="pt-label">🍜 슈리소바</div></div></div>
+      <div class="schedule-item"><div class="schedule-time">13:00</div><div class="schedule-content"><div class="schedule-title">🛍️ 국제거리 쇼핑 <span class="tag tag-spot">관광</span></div><div class="schedule-memo">베니모 타르트·기념품 구매</div></div><div class="photo-tooltip"><img src="https://lh3.googleusercontent.com/places/ANXAkqFp_jQ0d-a_oMzDK8FJKD2F_rSAKDAeMLsAY_B1cnU7TVXU37ylOfRPg0_TQ-2nAa8pwbsG4l-QDsGrPErJD_6BEKydEDnSiPiFRrW7LB3o_0ukLTi1HH7-bgPkTg9lvLS4EhLXRld28ra9Mg=s800-w400-h300"><div class="pt-label">🛍️ 나하 국제거리</div></div></div>
       <div class="schedule-item"><div class="schedule-time">14:30</div><div class="schedule-content"><div class="schedule-title">🚗 차탄 복귀</div><div class="schedule-memo"></div></div></div>
-      <div class="schedule-item"><div class="schedule-time">15:30</div><div class="schedule-content"><div class="schedule-title">🎮 포켓몬 센터 오키나와 <span class="tag tag-spot">관광</span></div><div class="schedule-memo">이온몰 라이카무 1F / 10AM~10PM / 오키나와 한정 굿즈 🔥</div></div></div>
-      <div class="schedule-item"><div class="schedule-time">17:30</div><div class="schedule-content"><div class="schedule-title">🍔 A&W 버거 <span class="tag tag-meal">간식</span></div><div class="schedule-memo">루트비어 플로트 필수! / 24시간 / 엔화 현금</div></div></div>
-      <div class="schedule-item"><div class="schedule-time">19:30</div><div class="schedule-content"><div class="schedule-title">🐍 와후테이 장어덮밥 <span class="tag tag-meal">저녁</span></div><div class="schedule-memo">나하 오모로마치 / 11AM~9PM / 오리온 맥주 🍺</div></div></div>
+      <div class="schedule-item"><div class="schedule-time">15:30</div><div class="schedule-content"><div class="schedule-title">🎮 포켓몬 센터 오키나와 <span class="tag tag-spot">관광</span></div><div class="schedule-memo">이온몰 라이카무 1F / 10AM~10PM / 오키나와 한정 굿즈 🔥</div></div><div class="photo-tooltip"><img src="https://lh3.googleusercontent.com/places/ANXAkqFLK2yQhgiYuRu6oabFw117mhKAicirYxG0mtd4beqS99kh_ZICURQeDOonVCCYikY1ebGmgfYycB7JFfJHA-8_5Ve0tbiXfIQ=s800-w400-h300"><div class="pt-label">🎮 포켓몬 센터 오키나와</div></div></div>
+      <div class="schedule-item"><div class="schedule-time">17:30</div><div class="schedule-content"><div class="schedule-title">🍔 A&W 버거 <span class="tag tag-meal">간식</span></div><div class="schedule-memo">루트비어 플로트 필수! / 24시간 / 엔화 현금</div></div><div class="photo-tooltip"><img src="https://lh3.googleusercontent.com/places/ANXAkqG_UJf8z_8qrzlMKEeJ56g6EIlBxf4mW9riLkKDnvn8XNyjsM6ZE-KhDXxT4H1aF5VO0b5nerzJkDnVeRvEKbZbPGA8VpkKAQI=s800-w400-h300"><div class="pt-label">🍔 A&W 루트비어 플로트</div></div></div>
+      <div class="schedule-item"><div class="schedule-time">19:30</div><div class="schedule-content"><div class="schedule-title">🐑 요테이산 징기스칸 <span class="tag tag-meal">저녁</span><a class="map-btn" href="https://www.google.com/maps/dir/?api=1&destination=26.2169,127.6899&travelmode=driving" target="_blank">🗺️ 지도</a></div><div class="schedule-memo">나하 마키시 1-3-11 하나카고로 1F / 숯불 양고기 구이 / 오리온 맥주 🍺</div></div><div class="photo-tooltip"><img src="https://images.unsplash.com/photo-1544025162-d76694265947?w=400&q=80"><div class="pt-label">🐑 요테이산 징기스칸</div></div></div>
     </div>
   </div>
+  </div><!-- /day-day3 -->
 
+  <div id="day-day4" class="day-page">
   <div class="day-block day-4">
     <div class="day-header"><div class="day-num">DAY 4</div><div class="info"><div class="date">3월 31일 (화)</div><div class="theme">귀국 🏠</div></div></div>
     <div class="day-body">
       <div class="schedule-item"><div class="schedule-time">08:00</div><div class="schedule-content"><div class="schedule-title">🏪 편의점 아침 & 체크아웃</div><div class="schedule-memo"></div></div></div>
       <div class="schedule-item"><div class="schedule-time">09:30</div><div class="schedule-content"><div class="schedule-title">🛍️ 차탄 막바지 쇼핑</div><div class="schedule-memo">베니모 타르트 추가 구매</div></div></div>
-      <div class="schedule-item"><div class="schedule-time">11:00</div><div class="schedule-content"><div class="schedule-title">🚗 우미카지 테라스 이동</div><div class="schedule-memo">차탄 → 우미카지 약 30분</div></div></div>
-      <div class="schedule-item"><div class="schedule-time">11:30</div><div class="schedule-content"><div class="schedule-title">🐟 오야지노 마구로 (참치 회덮밥) <span class="tag tag-meal">점심</span></div><div class="schedule-memo">우미카지 테라스 내 / 오션뷰+비행기 뷰 / 11AM~8:30PM</div></div></div>
+      <div class="schedule-item"><div class="schedule-time">11:00</div><div class="schedule-content"><div class="schedule-title">🚗 우미카지 테라스 이동 <span class="tag tag-travel">교통</span><a class="map-btn" href="https://www.google.com/maps/dir/?api=1&destination=26.1767,127.6404&travelmode=driving" target="_blank">🗺️ 지도</a></div><div class="schedule-memo">차탄 → 우미카지 약 30분</div></div><div class="photo-tooltip"><img src="https://lh3.googleusercontent.com/places/ANXAkqGn7pjWNe7NPPMd0GD8Sct8TN_pxpewUypgD7VlmmwXqz_8IXmoagW0HE7bPwbcX4zxemXZIws9i71BQsDsheI_UZJ1B1pA8f0=s800-w400-h300"><div class="pt-label">🌊 우미카지 테라스</div></div></div>
+      <div class="schedule-item"><div class="schedule-time">11:30</div><div class="schedule-content"><div class="schedule-title">🐟 오야지노 마구로 (참치 회덮밥) <span class="tag tag-meal">점심</span><a class="map-btn" href="https://www.google.com/maps/dir/?api=1&destination=26.1769,127.6405&travelmode=driving" target="_blank">🗺️ 지도</a></div><div class="schedule-memo">우미카지 테라스 내 / 오션뷰+비행기 뷰 / 11AM~8:30PM</div></div><div class="photo-tooltip"><img src="https://lh3.googleusercontent.com/places/ANXAkqETHVsA83S7BAKNtAKYhWLRFq6ogTOjmZpETceCmXVe3uhs92aETV8aNR1o4V7QcQR3170aWcNh7-wXUaKO650Liyu_CZ-p4ilRXIeQqF7z2ZvwgGSAAmXn4Hq_z41-SPfw1HrKaV_9ofBQxQ=s800-w400-h300"><div class="pt-label">🐟 오야지노 마구로 참치덮밥</div></div></div>
       <div class="schedule-item"><div class="schedule-time">12:30</div><div class="schedule-content"><div class="schedule-title">🚗 Oasis 렌트카 반납</div><div class="schedule-memo">나하공항 (우미카지 → 공항 5분!)</div></div></div>
       <div class="schedule-item"><div class="schedule-time">13:30</div><div class="schedule-content"><div class="schedule-title">🛒 면세점 쇼핑</div><div class="schedule-memo"></div></div></div>
       <div class="schedule-item"><div class="schedule-time">15:00</div><div class="schedule-content"><div class="schedule-title">✈️ 오키나와 출발</div><div class="schedule-memo">인천 도착 17:35</div></div></div>
       <div class="schedule-item"><div class="schedule-time">21:35</div><div class="schedule-content"><div class="schedule-title">🚅 광명역 KTX 출발</div><div class="schedule-memo">익산 도착 22:36 🏠</div></div></div>
     </div>
   </div>
+  </div><!-- /day-day4 -->
 </div>
 
 <div class="section-header"><div class="label">Food Plan</div><h2>식사 한눈에 보기 🍽️</h2></div>
 <section class="meals-section">
   <div class="meals-grid">
     <div class="meal-header">날짜</div><div class="meal-header">🌞 점심</div><div class="meal-header">🌙 저녁</div><div class="meal-header">🍡 간식·디저트</div>
-    <div class="meal-cell day-label">DAY 1</div><div class="meal-cell">—</div><div class="meal-cell">🥩 얏빠리스테이크</div><div class="meal-cell">☕ Zhyvago 카페</div>
-    <div class="meal-cell day-label">DAY 2</div><div class="meal-cell">🌮 타코라이스<br><small style="color:#999">Captain Kangaroo</small></div><div class="meal-cell">🏡 백년고가 우후야<br><small style="color:#c62828">예약 필수!</small></div><div class="meal-cell">🍦 블루실 아이스크림</div>
+    <div class="meal-cell day-label">DAY 1</div><div class="meal-cell">—</div><div class="meal-cell">🐉 차탄드래곤 야키니쿠</div><div class="meal-cell">☕ Zhyvago 카페</div>
+    <div class="meal-cell day-label">DAY 2</div><div class="meal-cell">🍜 백년고가 우후야<br><small style="color:#999">점심 웨이팅</small></div><div class="meal-cell">🐟 카이센 바텐</div><div class="meal-cell">🍦 블루실 아이스크림</div>
     <div class="meal-cell day-label">DAY 3</div><div class="meal-cell">🍜 슈리소바</div><div class="meal-cell">🐍 와후테이 장어덮밥</div><div class="meal-cell">🍔 A&W 루트비어</div>
     <div class="meal-cell day-label">DAY 4</div><div class="meal-cell">🐟 참치 회덮밥</div><div class="meal-cell">—</div><div class="meal-cell">—</div>
   </div>
@@ -532,6 +595,13 @@ function switchTab(name, btn) {
   document.getElementById('tab-' + name).classList.add('active');
   btn.classList.add('active');
   window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function switchDay(name, btn) {
+  document.querySelectorAll('.day-page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.day-tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('day-' + name).classList.add('active');
+  btn.classList.add('active');
 }
 </script>
 
